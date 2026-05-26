@@ -1,0 +1,16 @@
+# Web Serving Runtime (Kestrel equivalents)
+fastapi==0.110.0
+uvicorn[standard]==0.28.0
+
+# Data Engineering Pipeline (SIMD Vectorization/LINQ-equivalent engines)
+numpy==1.26.4
+pandas==2.2.1
+
+# Core AI/ML Framework
+scikit-learn==1.4.1.post1
+
+# Type Validation and Settings (System.Text.Json / Configuration mapping)
+pydantic==2.6.4
+pydantic-settings==2.2.1
+
+python-dotenv
