@@ -1,3 +1,4 @@
+import joblib
 from fastapi import FastAPI
 from src.app.core.config import settings
 from contextlib import asynccontextmanager
@@ -9,9 +10,15 @@ async def life_span(app:FastAPI):
    # STARTUP: Initialize/Load resource-heavy assets here
     print(f"[{settings.PROJECT_NAME}] Bootstrapping infrastructure...")
     
-    # Simulated Model Loading (We will place the real model binary state here later)
-    app_state["ml_model"] = {"model_name": settings.MODEL_NAME, "status": "active"}
-    print(f"[{settings.PROJECT_NAME}] ML Model loaded successfully into memory state.")
+    # Core Architecture Fix: Load our compiled binary model state into memory once
+    model_path = "artifacts/iris_classifier_v1.pkl"
+    
+    if joblib.os.path.exists(model_path):
+        app_state["ml_model"] = joblib.load(model_path)
+        print(f"[{settings.PROJECT_NAME}] Production ML Model deserialized successfully into state memory.")
+    else:
+        print(f"[{settings.PROJECT_NAME}] CRITICAL: Model binary artifact not found at {model_path}!")
+        app_state["ml_model"] = None
     
     yield  # The application runs and processes HTTP requests here
     
