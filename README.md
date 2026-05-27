@@ -1,9 +1,17 @@
-## Summry of learning session
+# Enterprise AI Microservice Architecture (FastAPI & Scikit-Learn)
 
--   **App Factory Core Architecture Pattern:** Decoupling configurations and handling single-instance resource orchestration using modern lifespan contextual constraints.
+A production-grade Python AI microservice designed with a .NET-inspired clean architecture layout. This project decouples the deterministic web serving framework from the stochastic machine learning asset lifecycle.
 
--   **Tabular & Vector Mathematics Pipeline:** Using Pandas and NumPy data structures to isolate, clean, and standardize inputs at native speeds.
+## Architectural Highlights
+* **App Factory Pattern**: Decoupled environment routing configuration using `pydantic-settings`.
+* **Lifespan Initialization Hook**: Synchronous ML binary deserialized into shared state memory precisely *once* at system startup to prevent memory leaks.
+* **Vectorized Data Transformation**: Real-time feature engineering normalization optimized via C-speed SIMD operations inside NumPy arrays.
+* **Thread-Safe Concurrent Execution**: Heavy synchronous mathematical calculations offloaded to worker threads via native FastAPI thread pool configuration.
 
--   **Immutability of Build Artifacts:** Designing a standalone train.py lifecycle optimization pipeline that spits out a reusable compiled ML model weight asset (.pkl).
+## Setup & Execution
 
--   **Thread Pool Optimization Contexts:** Serving a heavy CPU-bound mathematical machine learning layer inside a high-throughput async microservice API without risking execution blockages.
+### 1. Provision Environment
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Or .venv\Scripts\Activate.ps1 on Windows
+pip install -r requirements.txt

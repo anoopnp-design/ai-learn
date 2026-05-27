@@ -2,6 +2,8 @@ import joblib
 from fastapi import FastAPI
 from src.app.core.config import settings
 from contextlib import asynccontextmanager
+# --- ARCHITECT PATH FIX ---
+from pathlib import Path
 
 app_state ={}; # Dependency container 
 
@@ -11,7 +13,10 @@ async def life_span(app:FastAPI):
     print(f"[{settings.PROJECT_NAME}] Bootstrapping infrastructure...")
     
     # Core Architecture Fix: Load our compiled binary model state into memory once
-    model_path = "artifacts/iris_classifier_v1.pkl"
+    # 1. Dynamically calculate the absolute root workspace path
+    # Resolves back to the 'ai-learn' repository directory structure automatically
+    base_dir = Path(__file__).resolve().parent.parent.parent
+    model_path = base_dir / "artifacts" / "iris_classifier_v1.pkl"
     
     if joblib.os.path.exists(model_path):
         app_state["ml_model"] = joblib.load(model_path)
