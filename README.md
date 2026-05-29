@@ -15,3 +15,24 @@ A production-grade Python AI microservice designed with a .NET-inspired clean ar
 python -m venv .venv
 source .venv/bin/activate  # Or .venv\Scripts\Activate.ps1 on Windows
 pip install -r requirements.txt
+```
+
+### 2. Compile/Train the AI Binary
+
+```bash
+python -m src.pipelines.train
+```
+
+### 3. Run the Web Service Host
+
+```bash
+python -m uvicorn src.app.main:app --reload
+```
+
+### 4. Run the Automation Test Suite
+
+``` bash
+PYTHONPATH=. python -m pytest tests/
+```
+
+
